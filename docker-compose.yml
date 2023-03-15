@@ -1,0 +1,21 @@
+version: "3"
+services:
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    stdin_open: true
+  # 컨테이너 추가
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules #여기선 참조 안하고
+      - ./:/usr/src/app #여기서 참조하겠다
+    command: ["npm","run","test"]
