@@ -1,0 +1,9 @@
+sudo: required
+
+Lanngeuge: generic
+
+before_install
+- echo "start creating an image with dockerfile"
+- docker build - t ymj3539/docker-react-app -f Dockfile.dev.
+script:
+  - docker run -e CI=true ymj3539/docker-react-app npm run test -- --coverage
